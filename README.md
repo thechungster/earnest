@@ -1,4 +1,22 @@
+# earnest
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## Add a Gemini API Key
+
+1. **Obtain Your Gemini API Key**
+
+   To get your Gemini API Key, visit [https://aistudio.google.com/apikey](https://aistudio.google.com/apikey) and generate an API key.
+
+2. **Create or Update the `.env.local` File**
+
+   Create or update the `.env.local` file in the root of your project and set the `GEMINI_API_KEY` variable:
+
+   ```plaintext
+   GEMINI_API_KEY=YOUR_API_KEY_HERE
+   ```
+
+   Replace `YOUR_API_KEY_HERE` with the API key you generated.
 
 ## Getting Started
 
@@ -34,4 +52,3 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# earnest
