@@ -89,7 +89,7 @@ export const Questionnaire = ({ onQuestionsGenerated }) => {
       <div>
         <p className="text-lg font-semibold text-gray-700">How close are you? <span className="text-gray-400 text-sm font-normal">(Optional)</span></p>
         <div className="flex flex-wrap gap-2 mt-2">
-          {["just met", "getting to know each other", "pretty close", "extremely close"].map((level) => (
+          {["Just met", "Getting to know each other", "Pretty close", "Extremely close"].map((level) => (
             <button
               type="button"
               key={level}
