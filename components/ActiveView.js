@@ -36,8 +36,8 @@ export const ActiveView = ({ item, onClose, onQuestionsGenerated }) => {
     return null;
   }
 
-  // Determine what content to show inside the card
   const showQuestionnaire = item.isGenerator && !item.hasBeenGenerated;
+  const defaultBg = showQuestionnaire ? 'white' : '#eee9df';
 
   return (
     <AnimatePresence>
@@ -53,7 +53,7 @@ export const ActiveView = ({ item, onClose, onQuestionsGenerated }) => {
         <motion.div
           layoutId={`card-${item.title}`}
           className="inner"
-          style={{ backgroundColor: showQuestionnaire ? 'white' : '#eee9df' }}
+          style={{ backgroundColor: defaultBg }}
         >
           <div className="header">
             <div className="header-inner">
@@ -77,7 +77,9 @@ export const ActiveView = ({ item, onClose, onQuestionsGenerated }) => {
             className="relative w-full h-full flex justify-center items-center"
           >
             {showQuestionnaire ? (
-              <Questionnaire onQuestionsGenerated={onQuestionsGenerated} />
+              <Questionnaire
+                onQuestionsGenerated={onQuestionsGenerated}
+              />
             ) : (
               <QuestionCardStack questions={shuffledQuestions} background={item.background} />
             )}

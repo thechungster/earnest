@@ -7,9 +7,9 @@ export const Questionnaire = ({ onQuestionsGenerated }) => {
     closeness: "",
     vibe: [],
   });
+  const [isExtreme, setIsExtreme] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState(null);
-
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -45,7 +45,7 @@ export const Questionnaire = ({ onQuestionsGenerated }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(answers),
+        body: JSON.stringify({ ...answers, isExtreme }),
       });
 
       if (!response.ok) {
@@ -89,7 +89,7 @@ export const Questionnaire = ({ onQuestionsGenerated }) => {
       <div>
         <p className="text-lg font-semibold text-gray-700">How close are you? <span className="text-gray-400 text-sm font-normal">(Optional)</span></p>
         <div className="flex flex-wrap gap-2 mt-2">
-          {["Just met", "Getting to know each other", "Pretty close", "Extremely close"].map((level) => (
+          {["just met", "getting to know each other", "pretty close", "extremely close"].map((level) => (
             <button
               type="button"
               key={level}
@@ -122,21 +122,27 @@ export const Questionnaire = ({ onQuestionsGenerated }) => {
           ))}
         </div>
       </div>
+
+      <div className="flex items-center justify-center p-3 rounded-lg bg-red-50 border border-red-200 mt-2">
+        <label htmlFor="extreme-toggle" className="flex items-center gap-4 cursor-pointer">
+          <input
+            id="extreme-toggle"
+            type="checkbox"
+            checked={isExtreme}
+            onChange={(e) => setIsExtreme(e.target.checked)}
+            className="h-5 w-5 rounded border-gray-300 text-red-600 focus:ring-red-500"
+          />
+          <span className="text-md font-semibold text-red-800">Make it Extreme 🔥</span>
+        </label>
+      </div>
+
       {error && <p className="text-red-500 text-sm text-center">{error}</p>}
       <button
         type="submit"
         disabled={isGenerating || !answers.who}
         className="w-full px-4 py-3 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-400 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-all duration-200 ease-in-out"
       >
-        {isGenerating ? (
-          <>
-            <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            <span>Generating...</span>
-          </>
-        ) : "Generate Questions"}
+        {isGenerating ? "Generating..." : "Generate Questions"}
       </button>
     </form>
   );
